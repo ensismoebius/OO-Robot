@@ -28,7 +28,7 @@ namespace robotParts {
 			return LineSensor::BLACK_SIGNAL;
 		}
 
-		return LineSensor::UNDEFINED_SIGNAL;
+		return LineSensor::OUT_OF_RANGES_SIGNAL;
 	}
 
 	int LineSensor::getMiddleSensorState() {
@@ -42,7 +42,7 @@ namespace robotParts {
 			return LineSensor::BLACK_SIGNAL;
 		}
 
-		return LineSensor::UNDEFINED_SIGNAL;
+		return LineSensor::OUT_OF_RANGES_SIGNAL;
 	}
 
 	int LineSensor::getRightSensorState() {
@@ -56,13 +56,54 @@ namespace robotParts {
 			return LineSensor::BLACK_SIGNAL;
 		}
 
-		return LineSensor::UNDEFINED_SIGNAL;
+		return LineSensor::OUT_OF_RANGES_SIGNAL;
 	}
 
 	void LineSensor::calibrateSensors() {
-		for (int i = 0; i < 20; ++i) {
 
+		int left = 0;
+		int right = 0;
+		int middle = 0;
+
+		// Calibrating black color
+		for (int i = 0; i < 20; ++i) {
+			left = this->getLeftSensorState();
+			right = this->getRightSensorState();
+			middle = this->getMiddleSensorState();
+
+			Configurations::leftBlackAverage += left;
+			Configurations::rightBlackAverage += right;
+			Configurations::middleBlackAverage += middle;
+
+			Configurations::leftBlackError = left > Configurations::leftBlackError ? left : Configurations::leftBlackError;
+			Configurations::rightBlackError = right > Configurations::rightBlackError ? right : Configurations::rightBlackError;
+			Configurations::middleBlackError = middle > Configurations::middleBlackError ? middle : Configurations::middleBlackError;
+			delay(100);
 		}
+
+		// Calibrating white color
+		for (int i = 0; i < 20; ++i) {
+			left = this->getLeftSensorState();
+			right = this->getRightSensorState();
+			middle = this->getMiddleSensorState();
+
+			Configurations::leftWhiteAverage += left;
+			Configurations::rightWhiteAverage += right;
+			Configurations::middleWhiteAverage += middle;
+
+			Configurations::leftWhiteError = left > Configurations::leftWhiteError ? left : Configurations::leftWhiteError;
+			Configurations::rightWhiteError = right > Configurations::rightWhiteError ? right : Configurations::rightWhiteError;
+			Configurations::middleWhiteError = middle > Configurations::middleWhiteError ? middle : Configurations::middleWhiteError;
+			delay(100);
+		}
+
+		Configurations::leftBlackAverage /= 20;
+		Configurations::rightBlackAverage /= 20;
+		Configurations::middleBlackAverage /= 20;
+
+		Configurations::leftWhiteAverage /= 20;
+		Configurations::rightWhiteAverage /= 20;
+		Configurations::middleWhiteAverage /= 20;
 	}
 
 	bool LineSensor::isValueBetween(int value, int reference, int error) {

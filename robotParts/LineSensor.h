@@ -14,7 +14,7 @@ namespace robotParts {
 		public:
 			static const int BLACK_SIGNAL = 0;
 			static const int WHITE_SIGNAL = 1;
-			static const int UNDEFINED_SIGNAL = 2;
+			static const int OUT_OF_RANGES_SIGNAL = 2;
 			LineSensor();
 			int getLeftSensorState();
 			int getMiddleSensorState();
