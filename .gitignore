@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+*.bin
+
+# Eclipse ide metadata
+.project/
+.settings/
+.cproject
+.project
+/build/
+
