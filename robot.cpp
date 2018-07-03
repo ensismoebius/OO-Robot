@@ -1,17 +1,16 @@
 #include <Arduino.h>
 #include <Servo.h>
 
-#include "configurations/Configurations.h"
 #include "robotParts/Traction.h"
+#include "robotParts/LineSensor.h"
 
 using namespace robotParts;
-using namespace configurations;
 
 Traction b = Traction(14, 15);
-Configurations c = Configurations();
+LineSensor lineSensor = LineSensor();
 
 void setup() {
-	pinMode(13, OUTPUT);
+	lineSensor.calibrateSensors();
 }
 
 void loop() {

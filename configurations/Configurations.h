@@ -32,6 +32,8 @@ namespace configurations {
 			static long leftPin;
 			static long rightPin;
 			static long middlePin;
+
+			static int calibrationButtomPin;
 	};
 
 } /* namespace configurations */

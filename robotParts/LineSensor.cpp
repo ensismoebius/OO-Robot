@@ -65,6 +65,9 @@ namespace robotParts {
 		int right = 0;
 		int middle = 0;
 
+		// Waits until calibration button are pressed
+		while(digitalRead(Configurations::calibrationButtomPin) == LOW);
+
 		// Calibrating black color
 		for (int i = 0; i < 20; ++i) {
 			left = this->getLeftSensorState();
@@ -80,6 +83,9 @@ namespace robotParts {
 			Configurations::middleBlackError = middle > Configurations::middleBlackError ? middle : Configurations::middleBlackError;
 			delay(100);
 		}
+
+		// Waits until calibration button are pressed
+		while(digitalRead(Configurations::calibrationButtomPin) == LOW);
 
 		// Calibrating white color
 		for (int i = 0; i < 20; ++i) {

@@ -29,6 +29,8 @@ namespace configurations {
 	static long Configurations::rightPin;
 	static long Configurations::middlePin;
 
+	static int Configurations::calibrationButtomPin;
+
 	Configurations::Configurations() {
 		Configurations::leftWhiteError = 0;
 		Configurations::rightWhiteError = 0;
@@ -49,5 +51,7 @@ namespace configurations {
 		Configurations::leftPin = 14;
 		Configurations::rightPin = 16;
 		Configurations::middlePin = 15;
+
+		Configurations::calibrationButtomPin = 16;
 	}
 } /* namespace configurations */
