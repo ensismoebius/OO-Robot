@@ -1,6 +1,3 @@
-#include <Arduino.h>
-#include <Servo.h>
-
 #include "robotParts/Traction.h"
 #include "robotParts/LineSensor.h"
 #include "configurations/Configurations.h"
