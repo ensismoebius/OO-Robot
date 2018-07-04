@@ -39,6 +39,7 @@ namespace robotParts {
 
 	int LineSensor::getLeftSensorState() {
 		pinMode(this->leftPin, INPUT);
+		delay(100);
 
 		int value = analogRead(this->leftPin);
 
@@ -55,6 +56,7 @@ namespace robotParts {
 
 	int LineSensor::getMiddleSensorState() {
 		pinMode(this->middlePin, INPUT);
+		delay(100);
 
 		int value = analogRead(this->middlePin);
 
@@ -71,6 +73,7 @@ namespace robotParts {
 
 	int LineSensor::getRightSensorState() {
 		pinMode(this->rightPin, INPUT);
+		delay(100);
 
 		int value = analogRead(this->rightPin);
 
