@@ -8,6 +8,10 @@
 #include "stdlib.h"
 
 namespace robotParts {
+	Traction::Traction(){
+
+	}
+
 	Traction::Traction(int rightServoPin, int leftServoPin) {
 		this->rigthServo = Servo();
 		this->leftServo = Servo();

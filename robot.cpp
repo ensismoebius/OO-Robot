@@ -10,12 +10,14 @@ using namespace configurations;
 
 Traction traction;
 LineSensor lineSensor;
+
 void setup() {
 	Configurations::init();
 
 	traction = Traction(Configurations::rightLightSensorPin, Configurations::leftLightSensorPin);
 
 	lineSensor = LineSensor(Configurations::calibrationButtomPin);
+
 	lineSensor.calibrateSensors();
 }
 

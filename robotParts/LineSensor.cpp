@@ -11,25 +11,11 @@
 
 namespace robotParts {
 
+	LineSensor::LineSensor() {
+
+	}
+
 	LineSensor::LineSensor(int calibrationButtomPin) {
-		this->leftBlackError = 0;
-		this->leftWhiteError = 0;
-
-		this->rightBlackAverage = 0;
-		this->rightWhiteError = 0;
-
-		this->middleBlackError = 0;
-		this->middleWhiteError = 0;
-
-		this->leftBlackAverage = 0;
-		this->leftWhiteAverage = 0;
-
-		this->rightBlackAverage = 0;
-		this->rightWhiteAverage = 0;
-
-		this->middleBlackAverage = 0;
-		this->middleWhiteAverage = 0;
-
 		this->calibrationButtomPin = calibrationButtomPin;
 	}
 

@@ -15,6 +15,7 @@ namespace robotParts {
 	class Traction {
 		public:
 			Traction(int rightServoPin, int leftServoPin);
+			Traction();
 			void moveAhead(int amount);
 			void moveBack(int amount);
 			void stop();
