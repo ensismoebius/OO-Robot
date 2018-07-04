@@ -15,12 +15,34 @@ namespace robotParts {
 			static const int BLACK_SIGNAL = 0;
 			static const int WHITE_SIGNAL = 1;
 			static const int OUT_OF_RANGES_SIGNAL = 2;
-			LineSensor();
+			LineSensor(int calibrationButtomPin);
 			int getLeftSensorState();
 			int getMiddleSensorState();
 			int getRightSensorState();
 			void calibrateSensors();
 		private:
+			int leftPin;
+			int rightPin;
+			int middlePin;
+
+			int leftWhiteAverage;
+			int rightWhiteAverage;
+			int middleWhiteAverage;
+
+			int leftBlackAverage;
+			int rightBlackAverage;
+			int middleBlackAverage;
+
+			int leftWhiteError;
+			int rightWhiteError;
+			int middleWhiteError;
+
+			int leftBlackError;
+			int rightBlackError;
+			int middleBlackError;
+
+			int calibrationButtomPin;
+
 			bool isValueBetween(int value, int reference, int error);
 
 	};

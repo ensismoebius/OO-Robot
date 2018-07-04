@@ -12,28 +12,18 @@ namespace configurations {
 
 	class Configurations {
 		public:
-			Configurations();
-			static long leftWhiteAverage;
-			static long rightWhiteAverage;
-			static long middleWhiteAverage;
+			static void init();
 
-			static long leftWhiteError;
-			static long rightWhiteError;
-			static long middleWhiteError;
+			static int rightServoPin;
+			static int leftServoPin;
 
-			static long leftBlackAverage;
-			static long rightBlackAverage;
-			static long middleBlackAverage;
-
-			static long leftBlackError;
-			static long rightBlackError;
-			static long middleBlackError;
-
-			static long leftPin;
-			static long rightPin;
-			static long middlePin;
+			static long leftLightSensorPin;
+			static long rightLightSensorPin;
+			static long middleLightSensorPin;
 
 			static int calibrationButtomPin;
+
+			static int notificationLedPin;
 	};
 
 } /* namespace configurations */

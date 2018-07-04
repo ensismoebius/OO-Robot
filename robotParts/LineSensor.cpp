@@ -6,25 +6,43 @@
  */
 
 #include "LineSensor.h"
-#include "Arduino.h"
-#include "../configurations/Configurations.h"
 
-using namespace configurations;
+#include <Arduino.h>
 
 namespace robotParts {
 
-	LineSensor::LineSensor() {
+	LineSensor::LineSensor(int calibrationButtomPin) {
+		this->leftBlackError = 0;
+		this->leftWhiteError = 0;
 
+		this->rightBlackAverage = 0;
+		this->rightWhiteError = 0;
+
+		this->middleBlackError = 0;
+		this->middleWhiteError = 0;
+
+		this->leftBlackAverage = 0;
+		this->leftWhiteAverage = 0;
+
+		this->rightBlackAverage = 0;
+		this->rightWhiteAverage = 0;
+
+		this->middleBlackAverage = 0;
+		this->middleWhiteAverage = 0;
+
+		this->calibrationButtomPin = calibrationButtomPin;
 	}
 
 	int LineSensor::getLeftSensorState() {
-		int value = analogRead(Configurations::leftPin);
+		pinMode(this->leftPin, INPUT);
 
-		if (this->isValueBetween(value, Configurations::leftWhiteAverage, Configurations::leftWhiteError)) {
+		int value = analogRead(this->leftPin);
+
+		if (this->isValueBetween(value, this->leftWhiteAverage, this->leftWhiteError)) {
 			return LineSensor::WHITE_SIGNAL;
 		}
 
-		if (this->isValueBetween(value, Configurations::leftBlackAverage, Configurations::leftBlackError)) {
+		if (this->isValueBetween(value, this->leftBlackAverage, this->leftBlackError)) {
 			return LineSensor::BLACK_SIGNAL;
 		}
 
@@ -32,13 +50,15 @@ namespace robotParts {
 	}
 
 	int LineSensor::getMiddleSensorState() {
-		int value = analogRead(Configurations::middlePin);
+		pinMode(this->middlePin, INPUT);
 
-		if (this->isValueBetween(value, Configurations::middleWhiteAverage, Configurations::middleWhiteError)) {
+		int value = analogRead(this->middlePin);
+
+		if (this->isValueBetween(value, this->middleWhiteAverage, this->middleWhiteError)) {
 			return LineSensor::WHITE_SIGNAL;
 		}
 
-		if (this->isValueBetween(value, Configurations::middleBlackAverage, Configurations::middleBlackError)) {
+		if (this->isValueBetween(value, this->middleBlackAverage, this->middleBlackError)) {
 			return LineSensor::BLACK_SIGNAL;
 		}
 
@@ -46,13 +66,15 @@ namespace robotParts {
 	}
 
 	int LineSensor::getRightSensorState() {
-		int value = analogRead(Configurations::rightPin);
+		pinMode(this->rightPin, INPUT);
 
-		if (this->isValueBetween(value, Configurations::rightWhiteAverage, Configurations::rightWhiteError)) {
+		int value = analogRead(this->rightPin);
+
+		if (this->isValueBetween(value, this->rightWhiteAverage, this->rightWhiteError)) {
 			return LineSensor::WHITE_SIGNAL;
 		}
 
-		if (this->isValueBetween(value, Configurations::rightBlackAverage, Configurations::rightBlackError)) {
+		if (this->isValueBetween(value, this->rightBlackAverage, this->rightBlackError)) {
 			return LineSensor::BLACK_SIGNAL;
 		}
 
@@ -61,55 +83,64 @@ namespace robotParts {
 
 	void LineSensor::calibrateSensors() {
 
+		pinMode(this->leftPin, INPUT);
+		pinMode(this->rightPin, INPUT);
+		pinMode(this->middlePin, INPUT);
+		pinMode(this->calibrationButtomPin, INPUT);
+
 		int left = 0;
 		int right = 0;
 		int middle = 0;
 
 		// Waits until calibration button are pressed
-		while(digitalRead(Configurations::calibrationButtomPin) == LOW);
+		while (digitalRead(this->calibrationButtomPin) == LOW)
+			;
 
 		// Calibrating black color
-		for (int i = 0; i < 20; ++i) {
-			left = this->getLeftSensorState();
-			right = this->getRightSensorState();
-			middle = this->getMiddleSensorState();
+		for (int i = 1; i <= 20; ++i) {
+			left = analogRead(this->leftPin);
+			right = analogRead(this->rightPin);
+			middle = analogRead(this->middlePin);
 
-			Configurations::leftBlackAverage += left;
-			Configurations::rightBlackAverage += right;
-			Configurations::middleBlackAverage += middle;
+			this->leftBlackAverage += left;
+			this->rightBlackAverage += right;
+			this->middleBlackAverage += middle;
 
-			Configurations::leftBlackError = left > Configurations::leftBlackError ? left : Configurations::leftBlackError;
-			Configurations::rightBlackError = right > Configurations::rightBlackError ? right : Configurations::rightBlackError;
-			Configurations::middleBlackError = middle > Configurations::middleBlackError ? middle : Configurations::middleBlackError;
+			this->leftBlackError = abs(this->leftBlackAverage / i - left);
+			this->rightBlackError = abs(this->rightBlackAverage / i - right);
+			this->middleBlackError = abs(this->middleBlackAverage / i - middle);
+
 			delay(100);
 		}
 
 		// Waits until calibration button are pressed
-		while(digitalRead(Configurations::calibrationButtomPin) == LOW);
+		while (digitalRead(this->calibrationButtomPin) == LOW)
+			;
 
 		// Calibrating white color
-		for (int i = 0; i < 20; ++i) {
-			left = this->getLeftSensorState();
-			right = this->getRightSensorState();
-			middle = this->getMiddleSensorState();
+		for (int i = 1; i <= 20; ++i) {
+			left = analogRead(this->leftPin);
+			right = analogRead(this->rightPin);
+			middle = analogRead(this->middlePin);
 
-			Configurations::leftWhiteAverage += left;
-			Configurations::rightWhiteAverage += right;
-			Configurations::middleWhiteAverage += middle;
+			this->leftWhiteAverage += left;
+			this->rightWhiteAverage += right;
+			this->middleWhiteAverage += middle;
 
-			Configurations::leftWhiteError = left > Configurations::leftWhiteError ? left : Configurations::leftWhiteError;
-			Configurations::rightWhiteError = right > Configurations::rightWhiteError ? right : Configurations::rightWhiteError;
-			Configurations::middleWhiteError = middle > Configurations::middleWhiteError ? middle : Configurations::middleWhiteError;
+			this->leftWhiteError = abs(this->leftWhiteAverage / i - left);
+			this->rightWhiteError = abs(this->rightWhiteAverage / i - right);
+			this->middleWhiteError = abs(this->middleWhiteAverage / i - middle);
+
 			delay(100);
 		}
 
-		Configurations::leftBlackAverage /= 20;
-		Configurations::rightBlackAverage /= 20;
-		Configurations::middleBlackAverage /= 20;
+		this->leftBlackAverage /= 20;
+		this->rightBlackAverage /= 20;
+		this->middleBlackAverage /= 20;
 
-		Configurations::leftWhiteAverage /= 20;
-		Configurations::rightWhiteAverage /= 20;
-		Configurations::middleWhiteAverage /= 20;
+		this->leftWhiteAverage /= 20;
+		this->rightWhiteAverage /= 20;
+		this->middleWhiteAverage /= 20;
 	}
 
 	bool LineSensor::isValueBetween(int value, int reference, int error) {

@@ -3,19 +3,25 @@
 
 #include "robotParts/Traction.h"
 #include "robotParts/LineSensor.h"
+#include "configurations/Configurations.h"
 
 using namespace robotParts;
+using namespace configurations;
 
-Traction b = Traction(14, 15);
-LineSensor lineSensor = LineSensor();
-
+Traction traction;
+LineSensor lineSensor;
 void setup() {
+	Configurations::init();
+
+	traction = Traction(Configurations::rightLightSensorPin, Configurations::leftLightSensorPin);
+
+	lineSensor = LineSensor(Configurations::calibrationButtomPin);
 	lineSensor.calibrateSensors();
 }
 
 void loop() {
 	digitalWrite(13, HIGH);
-	b.moveAhead(100);
+	traction.moveAhead(100);
 	digitalWrite(13, LOW);
-	b.moveBack(100);
+	traction.moveBack(100);
 }
