@@ -15,12 +15,20 @@ namespace robotParts {
 			static const int BLACK_SIGNAL = 0;
 			static const int WHITE_SIGNAL = 1;
 			static const int OUT_OF_RANGES_SIGNAL = 2;
+
 			LineSensor(int calibrationButtomPin);
 			LineSensor();
+
 			int getLeftSensorState();
-			int getMiddleSensorState();
 			int getRightSensorState();
-			void calibrateSensors();
+			int getMiddleSensorState();
+
+			bool calibrateSensors();
+
+			void setLeftPin(int leftPin);
+			void setRightPin(int rightPin);
+			void setMiddlePin(int middlePin);
+			void setCalibrationButtomPin(int calibrationButtomPin);
 		private:
 			int leftPin;
 			int rightPin;

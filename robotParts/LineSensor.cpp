@@ -12,11 +12,29 @@
 namespace robotParts {
 
 	LineSensor::LineSensor() {
-
+		this->leftPin = 0;
+		this->rightPin = 0;
+		this->middlePin = 0;
 	}
 
 	LineSensor::LineSensor(int calibrationButtomPin) {
 		this->calibrationButtomPin = calibrationButtomPin;
+	}
+
+	void LineSensor::setCalibrationButtomPin(int calibrationButtomPin) {
+		this->calibrationButtomPin = calibrationButtomPin;
+	}
+
+	void LineSensor::setLeftPin(int leftPin) {
+		this->leftPin = leftPin;
+	}
+
+	void LineSensor::setMiddlePin(int middlePin) {
+		this->middlePin = middlePin;
+	}
+
+	void LineSensor::setRightPin(int rightPin) {
+		this->rightPin = rightPin;
 	}
 
 	int LineSensor::getLeftSensorState() {
@@ -67,7 +85,12 @@ namespace robotParts {
 		return LineSensor::OUT_OF_RANGES_SIGNAL;
 	}
 
-	void LineSensor::calibrateSensors() {
+	bool LineSensor::calibrateSensors() {
+
+		// All pins MUST be informed
+		if (this->leftPin == 0 || this->rightPin == 0 || this->middlePin == 0) {
+			return false;
+		}
 
 		pinMode(this->leftPin, INPUT);
 		pinMode(this->rightPin, INPUT);
@@ -127,6 +150,8 @@ namespace robotParts {
 		this->leftWhiteAverage /= 20;
 		this->rightWhiteAverage /= 20;
 		this->middleWhiteAverage /= 20;
+
+		return true;
 	}
 
 	bool LineSensor::isValueBetween(int value, int reference, int error) {

@@ -8,7 +8,7 @@
 #include "stdlib.h"
 
 namespace robotParts {
-	Traction::Traction(){
+	Traction::Traction() {
 
 	}
 
