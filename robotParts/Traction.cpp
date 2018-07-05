@@ -19,9 +19,16 @@ namespace robotParts {
 		this->leftServoPin = leftServoPin;
 	}
 
-	void Traction::turnAround(int amount) {
+	void Traction::turnAroundClockwise(int amount) {
 		for (int i = 5; i <= amount; i += 5) {
 			this->turnLeft(i);
+			this->moveAhead(i);
+		}
+	}
+
+	void Traction::turnAroundCounterClockwise(int amount) {
+		for (int i = 5; i <= amount; i += 5) {
+			this->turnRight(i);
 			this->moveAhead(i);
 		}
 	}

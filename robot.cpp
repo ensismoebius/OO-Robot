@@ -45,8 +45,14 @@ void loop() {
 	delay(200);
 	Notification::turnOn();
 
-	if (sonicSensor.frontReachObstacle() || sonicSensor.leftReachObstacle() || sonicSensor.rightReachObstacle()) {
-		traction.turnAround(10);
+	if (sonicSensor.reachFrontObstacle() || sonicSensor.reachLeftObstacle() || sonicSensor.reachRightObstacle()) {
+
+		if (sonicSensor.reachRightObstacle()) {
+			traction.turnAroundClockwise(10);
+			return;
+		}
+
+		traction.turnAroundCounterClockwise(10);
 		return;
 	}
 

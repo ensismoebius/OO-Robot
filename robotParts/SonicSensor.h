@@ -14,9 +14,9 @@ namespace configurations {
 		public:
 			SonicSensor();
 
-			bool leftReachObstacle();
-			bool rightReachObstacle();
-			bool frontReachObstacle();
+			bool reachLeftObstacle();
+			bool reachRightObstacle();
+			bool reachFrontObstacle();
 
 			void setObstacleDistance(int obstacleDistance = 0);
 

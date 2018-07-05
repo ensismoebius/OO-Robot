@@ -15,21 +15,21 @@ namespace configurations {
 
 	}
 
-	bool SonicSensor::leftReachObstacle() {
+	bool SonicSensor::reachLeftObstacle() {
 		if (getDistance(this->leftEchoPin, this->leftTriggerPin) <= this->obstacleDistance) {
 			return true;
 		}
 		return false;
 	}
 
-	bool SonicSensor::rightReachObstacle() {
+	bool SonicSensor::reachRightObstacle() {
 		if (getDistance(this->rightEchoPin, this->rightTriggerPin) <= this->obstacleDistance) {
 			return true;
 		}
 		return false;
 	}
 
-	bool SonicSensor::frontReachObstacle() {
+	bool SonicSensor::reachFrontObstacle() {
 		if (getDistance(this->frontEchoPin, this->frontTriggerPin) <= this->obstacleDistance) {
 			return true;
 		}
