@@ -17,13 +17,23 @@ namespace configurations {
 			static int rightServoPin;
 			static int leftServoPin;
 
-			static long leftLightSensorPin;
-			static long rightLightSensorPin;
-			static long middleLightSensorPin;
+			static int leftLightSensorPin;
+			static int rightLightSensorPin;
+			static int middleLightSensorPin;
 
 			static int calibrationButtomPin;
 
 			static int notificationLedPin;
+
+			static int leftSonicSensorEchoPin;
+			static int rightSonicSensorEchoPin;
+			static int frontSonicSensorEchoPin;
+
+			static int leftSonicSensorTriggerPin;
+			static int rightSonicSensorTriggerPin;
+			static int frontSonicSensorTriggerPin;
+
+			static int obstacleDistance;
 	};
 
 } /* namespace configurations */

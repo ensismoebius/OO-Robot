@@ -21,6 +21,8 @@ namespace robotParts {
 			void stop();
 			void turnRight(int amount);
 			void turnLeft(int amount);
+
+			void turnAround(int amount);
 		private:
 			Servo rigthServo;
 			Servo leftServo;

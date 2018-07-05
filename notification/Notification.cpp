@@ -14,12 +14,15 @@ namespace configurations {
 	static int Notification::outputPin;
 
 	static void Notification::init(int pinNumber) {
+		Serial.begin(9600);
 		Notification::outputPin = pinNumber;
 	}
 
 	static void Notification::wait() {
 
 		pinMode(Notification::outputPin, OUTPUT);
+
+		Serial.write("Wait...");
 
 		for (int var = 0; var < 5; ++var) {
 			digitalWrite(Notification::outputPin, HIGH);
@@ -33,6 +36,8 @@ namespace configurations {
 	static void Notification::read() {
 
 		pinMode(Notification::outputPin, OUTPUT);
+
+		Serial.write("Read!");
 
 		for (int var = 0; var < 20; ++var) {
 			digitalWrite(Notification::outputPin, HIGH);

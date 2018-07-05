@@ -18,6 +18,14 @@ namespace robotParts {
 		this->rightServoPin = rightServoPin;
 		this->leftServoPin = leftServoPin;
 	}
+
+	void Traction::turnAround(int amount) {
+		for (int i = 5; i <= amount; i += 5) {
+			this->turnLeft(i);
+			this->moveAhead(i);
+		}
+	}
+
 	void Traction::moveAhead(int amount) {
 		this->rigthServo.attach(this->rightServoPin);
 		this->leftServo.attach(this->leftServoPin);
