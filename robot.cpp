@@ -43,7 +43,7 @@ void setup() {
 
 void loop() {
 	delay(200);
-	digitalWrite(13, HIGH);
+	Notification::turnOn();
 
 	if (sonicSensor.frontReachObstacle() || sonicSensor.leftReachObstacle() || sonicSensor.rightReachObstacle()) {
 		traction.turnAround(10);
@@ -59,5 +59,6 @@ void loop() {
 	if (lineSensor.getMiddleSensorState() == LineSensor::WHITE_SIGNAL && lineSensor.getMiddleSensorState() == LineSensor::WHITE_SIGNAL && lineSensor.getMiddleSensorState() == LineSensor::WHITE_SIGNAL) {
 		traction.moveAhead(10);
 	}
-	digitalWrite(13, LOW);
+
+	Notification::turnOff();
 }

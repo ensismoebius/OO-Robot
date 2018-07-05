@@ -48,4 +48,14 @@ namespace configurations {
 		digitalWrite(Notification::outputPin, LOW);
 	}
 
+	void Notification::turnOn() {
+		pinMode(Notification::outputPin, OUTPUT);
+		digitalWrite(Notification::outputPin, HIGH);
+	}
+
+	void Notification::turnOff() {
+		pinMode(Notification::outputPin, OUTPUT);
+		digitalWrite(Notification::outputPin, LOW);
+	}
+
 } /* namespace configurations */

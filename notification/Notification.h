@@ -15,6 +15,8 @@ namespace configurations {
 			static void init(int pinNumber);
 			static void wait();
 			static void read();
+			static void turnOn();
+			static void turnOff();
 		private:
 			static int outputPin;
 
